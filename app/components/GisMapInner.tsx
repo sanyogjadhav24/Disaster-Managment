@@ -111,6 +111,10 @@ export default function GisMapInner({
       const [lng, lat] = node.location.coordinates;
       const gwId = node.radio?.gatewayId;
       const gwCoords = gwMap[gwId];
+      const isNodeActive = node.status?.toLowerCase() === 'active';
+      const statusText = isNodeActive ? 'ACTIVE' : 'INACTIVE';
+      const statusColor = isNodeActive ? '#10b981' : '#94a3b8';
+      const riskLevel = node.latestReading?.risk?.level || 'NORMAL';
 
       // Draw animated radio hop line to its gateway when active
       if (gwCoords) {
@@ -123,12 +127,6 @@ export default function GisMapInner({
         });
         lg.addLayer(polyline);
       }
-
-      // Risk level & colors
-      const riskLevel = node.latestReading?.risk?.level || 'NORMAL';
-      const isNodeActive = node.status?.toLowerCase() === 'active';
-      const statusText = isNodeActive ? 'ACTIVE' : 'INACTIVE';
-      const statusColor = isNodeActive ? '#10b981' : '#94a3b8';
 
       let ringColor = 'border-emerald-500 bg-emerald-500/10 text-emerald-400';
       let haloColor = 'rgba(16, 185, 129, 0.4)';
