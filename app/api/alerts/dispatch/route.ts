@@ -119,12 +119,12 @@ export async function POST(request: NextRequest) {
             status = 'DISPATCHED (SIMULATED)';
           }
         } else {
-          // Voice Call dispatch
+          // Live Twilio Voice Call dispatch
           const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Calls.json`;
           const form = new URLSearchParams();
           form.append('To', targetPhone);
-          form.append('From', twilioFrom);
-          form.append('Url', 'http://demo.twilio.com/docs/voice.xml');
+          form.append('From', twilioFrom || '+17372212163');
+          form.append('Url', 'https://webhooks.twilio.com/v1/Voice/Template/voice_speech_recognition');
 
           const twilioRes = await fetch(twilioUrl, {
             method: 'POST',
