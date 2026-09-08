@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { DEFAULT_CONTACTS } from '../dispatch/route';
+import { DEFAULT_CONTACTS } from '@/lib/contacts';
 
 export const dynamic = 'force-dynamic';
 
